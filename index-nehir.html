@@ -3,41 +3,188 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tile by Nehir</title>
+    <title>Tile by Nehir - Party Mode!</title>
 
-    <!-- 📌 Add the Bootstrap 5 CDN here when ready -->
-    <!-- Example: <link href="..." rel="stylesheet"> -->
+    <!-- Bootstrap 5 CDN for easy styling -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
       rel="stylesheet"
     />
+    <style>
+      /* Animated rainbow gradient background for party mode */
+      body {
+        min-height: 100vh;
+        background: linear-gradient(270deg, #ff6ec4, #7873f5, #42e695, #ffe66d, #ff6ec4);
+        background-size: 1000% 1000%;
+        animation: partyBG 10s linear infinite;
+      }
+      @keyframes partyBG {
+        0% {background-position: 0% 50%;}
+        25% {background-position: 50% 100%;}
+        50% {background-position: 100% 50%;}
+        75% {background-position: 50% 0%;}
+        100% {background-position: 0% 50%;}
+      }
+      /* Morphing and color-changing effect for images */
+      .tile-glow {
+        width: 320px;
+        height: 320px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 0 30px 10px #fff176, 0 2px 20px rgba(0,0,0,0.15);
+        transition: 
+          box-shadow 0.3s, 
+          transform 0.3s, 
+          filter 0.3s,
+          border-radius 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        filter: grayscale(10%) brightness(1.05);
+        animation: morphShape 4s infinite alternate, partyGlow 2s infinite alternate, bounce 2s infinite;
+      }
+      /* Glow aura and spin on hover */
+      .tile-glow:hover {
+        box-shadow: 0 0 80px 20px #ff6ec4, 0 0 60px 10px #42e695, 0 2px 20px #ffe66d;
+        transform: scale(1.12) rotate(8deg);
+        filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 40px #7873f5);
+        border: 6px solid #fff176;
+        z-index: 2;
+        animation: morphShape 1.5s infinite alternate, partyGlow 0.7s infinite alternate, spin 1.2s linear infinite;
+      }
+      /* Morphing shapes */
+      @keyframes morphShape {
+        0%   { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+        20%  { border-radius: 60% 40% 55% 45% / 45% 60% 40% 55%; }
+        40%  { border-radius: 40% 60% 45% 55% / 60% 40% 55% 45%; }
+        60%  { border-radius: 55% 45% 60% 40% / 40% 55% 45% 60%; }
+        80%  { border-radius: 70% 30% 60% 40% / 50% 70% 30% 50%; }
+        100% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+      }
+      /* Colorful glow animation */
+      @keyframes partyGlow {
+        0%   { box-shadow: 0 0 30px 10px #fff176, 0 2px 20px #ff6ec4; }
+        25%  { box-shadow: 0 0 40px 15px #42e695, 0 2px 20px #7873f5; }
+        50%  { box-shadow: 0 0 50px 20px #ffe66d, 0 2px 20px #ff6ec4; }
+        75%  { box-shadow: 0 0 60px 25px #ff6ec4, 0 2px 20px #42e695; }
+        100% { box-shadow: 0 0 30px 10px #fff176, 0 2px 20px #ff6ec4; }
+      }
+      /* Spin animation for extra party! */
+      @keyframes spin {
+        0% { transform: rotate(0deg);}
+        100% { transform: rotate(360deg);}
+      }
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        20% {
+          transform: translateY(-30px);
+        }
+        40% {
+          transform: translateY(-50px);
+        }
+        60% {
+          transform: translateY(-30px);
+        }
+        80% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- Main container for your layout -->
-    <div class="container py-5">
+    <div class="container py-5 d-flex flex-column align-items-center justify-content-center min-vh-100">
       <!-- Heading styled with Playfair Display font and centered -->
       <h1
-        class="text-center mb-4"
+        class="text-center mb-4 px-4 py-2 rounded shadow"
         style="
           font-family: 'Playfair Display', serif;
-          background-color: #e8d9d6;
+          background: linear-gradient(90deg,#ff6ec4,#42e695,#ffe66d,#7873f5,#ff6ec4);
+          color: #222;
+          display: inline-block;
+          animation: partyBG 5s linear infinite;
         "
       >
-        Tile by Nehir
+        Tile by Nehir 🎉 Party Mode!
       </h1>
 
-      <!-- Starting state: just images, no Bootstrap grid yet -->
-      <!-- You’ll turn these into responsive tiles during the demo -->
-      <img src="assets/tile1.jpg" alt="Tile print 1" class="mb-3" />
-      <img src="assets/tile2.jpg" alt="Tile print 2" class="mb-3" />
-      <img src="assets/tile3.jpg" alt="Tile print 3" class="mb-3" />
-      <img src="assets/tile4.jpg" alt="Tile print 4" class="mb-3" />
+      <!-- Bootstrap grid for responsive image tiles, centered horizontally -->
+      <div class="row g-4 justify-content-center w-100">
+        <!-- Each image is in a column that adjusts for screen size and is centered -->
+        <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
+          <img src="assets/tile1.jpg" alt="Tile print 1" class="img-fluid border tile-glow" />
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
+          <img src="assets/tile2.jpg" alt="Tile print 2" class="img-fluid border tile-glow" />
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
+          <img src="assets/tile3.jpg" alt="Tile print 3" class="img-fluid border tile-glow" />
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
+          <img src="assets/tile4.jpg" alt="Tile print 4" class="img-fluid border tile-glow" />
+        </div>
+      </div>
+      <!-- 
+        - .tile-glow makes images morph and glow with party colors
+        - .tile-glow:hover spins and glows even more
+        - The background is a rainbow animated gradient
+      -->
+    </div>
 
-      <!-- 💡 Later you'll:
-         - Wrap these in Bootstrap grid classes
-         - Add .img-fluid and .border-tile
-         - Use AI to improve layout or spacing
-    --></div>
+    <!-- Add this script before the closing </body> tag -->
+    <script>
+    // This script makes each .tile-glow image "bounce" around the screen randomly
+
+    // Wait until the page is fully loaded
+    window.addEventListener('DOMContentLoaded', () => {
+      // Select all images with the .tile-glow class
+      const images = document.querySelectorAll('.tile-glow');
+
+      // For each image, set up bouncing logic
+      images.forEach((img, i) => {
+        // Remove Bootstrap's grid/flex so we can move freely
+        img.parentElement.style.position = 'absolute';
+        img.parentElement.style.left = `${50 + i * 350}px`;
+        img.parentElement.style.top = `${100 + i * 50}px`;
+
+        // Set initial position and speed
+        let x = 50 + i * 350;
+        let y = 100 + i * 50;
+        let dx = 2 + Math.random() * 2; // random speed x
+        let dy = 2 + Math.random() * 2; // random speed y
+
+        // Animate the image
+        function bounce() {
+          // Get window size
+          const winWidth = window.innerWidth;
+          const winHeight = window.innerHeight;
+
+          // Get image size
+          const imgWidth = img.offsetWidth;
+          const imgHeight = img.offsetHeight;
+
+          // Bounce off the edges
+          if (x + imgWidth > winWidth || x < 0) dx = -dx;
+          if (y + imgHeight > winHeight || y < 0) dy = -dy;
+
+          // Move position
+          x += dx;
+          y += dy;
+
+          // Apply position
+          img.parentElement.style.left = `${x}px`;
+          img.parentElement.style.top = `${y}px`;
+
+          requestAnimationFrame(bounce);
+        }
+
+        bounce();
+      });
+    });
+    </script>
   </body>
 </html>
